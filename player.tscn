@@ -1,0 +1,67 @@
+[gd_scene load_steps=11 format=3 uid="uid://dc52fe8ymr58r"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_0krlv"]
+[ext_resource type="Texture2D" uid="uid://dca4i2mvsxell" path="res://art/GoodGuy/sprite_goodguy0.png" id="1_8khvg"]
+[ext_resource type="Texture2D" uid="uid://bjnnclf761w8w" path="res://art/GoodGuy/sprite_goodguy1.png" id="2_bau0o"]
+[ext_resource type="Texture2D" uid="uid://cf5d821louw8a" path="res://art/GoodGuy/sprite_goodguy2.png" id="4_huxe4"]
+[ext_resource type="Texture2D" uid="uid://cm83n8b3i2w7e" path="res://art/GoodGuy/sprite_goodguy3.png" id="5_s26wx"]
+[ext_resource type="Texture2D" uid="uid://y1ofhv7d673" path="res://art/GoodGuy/sprite_goodguy5.png" id="6_fr4gd"]
+[ext_resource type="Texture2D" uid="uid://ckf8d76pjce4a" path="res://art/GoodGuy/sprite_goodguy4.png" id="7_nj7rm"]
+[ext_resource type="Texture2D" uid="uid://li667el1kb5p" path="res://art/GoodGuy/sprite_goodguy6.png" id="8_e3746"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_n05pq"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"up",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_8khvg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_bau0o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_huxe4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_s26wx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_fr4gd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_nj7rm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_e3746")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 10.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6p1d2"]
+radius = 17.0
+height = 60.0
+
+[node name="Player" type="Area2D"]
+position = Vector2(42, 90)
+script = ExtResource("1_0krlv")
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(27, -6)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_n05pq")
+animation = &"walk"
+frame = 1
+frame_progress = 0.312135
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(27, -8)
+shape = SubResource("CapsuleShape2D_6p1d2")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
