@@ -105,8 +105,8 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_u65tp"]
-radius = 15.0
-height = 48.0
+radius = 30.0
+height = 92.0
 
 [node name="Mob" type="RigidBody2D"]
 collision_mask = 0
@@ -114,12 +114,12 @@ gravity_scale = 2.66454e-15
 script = ExtResource("1_k8chb")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." groups=["mobs"]]
-scale = Vector2(2, 2)
+scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_68hws")
-animation = &"swim"
+animation = &"walk"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -3)
+position = Vector2(-1, -7)
 shape = SubResource("CapsuleShape2D_u65tp")
 metadata/_edit_group_ = true
 

@@ -1,5 +1,7 @@
 extends Node
 
+const HIGH_SCORE_FILE_NAME = "user://high_score.dat"
+
 @export var mob_scene: PackedScene
 var score
 
@@ -7,7 +9,7 @@ var score
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
+	display_high_score()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -16,6 +18,8 @@ func _process(delta):
 
 
 func game_over():
+	save_high_score()
+	display_high_score()
 	$ScoreTimer.stop()
 	$MobTimer.stop()
 	$HUD.show_game_over()
@@ -69,3 +73,39 @@ func _on_score_timer_timeout():
 func _on_start_timer_timeout():
 	$MobTimer.start()
 	$ScoreTimer.start()
+
+
+func get_high_score() -> int:
+	if FileAccess.file_exists(HIGH_SCORE_FILE_NAME):
+		var high_score_file = FileAccess.open(HIGH_SCORE_FILE_NAME, FileAccess.READ)
+		var high_score_data = JSON.parse_string(high_score_file.get_line())
+		print("HSD: " + str(high_score_data))
+		if high_score_data != null:
+			return high_score_data.high_score
+	return 0
+
+func set_high_score(high_score):
+	var high_score_data = {
+		"high_score": high_score
+	}
+	var high_score_file = FileAccess.open(HIGH_SCORE_FILE_NAME, FileAccess.WRITE)
+	high_score_file.store_line(JSON.stringify(high_score_data))
+	high_score_file.close()
+
+
+func display_high_score():
+	$HUD/HighScore.text = str(get_high_score())
+
+
+func save_high_score():
+	if not FileAccess.file_exists(HIGH_SCORE_FILE_NAME):
+		# Set HIGH SCORE as current score
+		set_high_score(score)
+	else:
+		# Get HIGH SCORE from file
+		# And then compare current score with high score
+		# If score >= than high score, store it
+		var high_score = get_high_score()
+		
+		if score >= high_score:
+			set_high_score(score)

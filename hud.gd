@@ -24,10 +24,13 @@ func show_game_over():
 	# Wait until the MessageTimer has counted down
 	await $MessageTimer.timeout
 	
-	$Message.text = "Dodge the Viruses"
+	$Message.text = "Dodge the Viruses!"
 	$Message.show()
 	# make a one shot timer and wait for it to finish
 	await get_tree().create_timer(1.0).timeout
+	$HighScore.show()
+	# TODO: Calculate high score
+	$HighScoreText.show()
 	$StartButton.show()
 
 
@@ -38,11 +41,13 @@ func update_score(score):
 
 
 func _on_message_timer_timeout():
+	if $Message.text == "Dodge the Viruses!":
+		return
 	$Message.hide()
 
 
 func _on_start_button_pressed():
 	$StartButton.hide()
+	$HighScore.hide()
+	$HighScoreText.hide()
 	start_game.emit()
-
-
