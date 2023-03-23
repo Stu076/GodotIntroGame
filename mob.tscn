@@ -1,82 +1,16 @@
-[gd_scene load_steps=25 format=3 uid="uid://cxg4fhtdjkoot"]
+[gd_scene load_steps=11 format=3 uid="uid://cxg4fhtdjkoot"]
 
 [ext_resource type="Script" path="res://mob.gd" id="1_k8chb"]
 [ext_resource type="Texture2D" uid="uid://tv5lpdj70tc6" path="res://art/BadGuy/sprite_badguy0.png" id="1_libon"]
-[ext_resource type="Texture2D" uid="uid://b0tvcsps25jjt" path="res://art/BadGuy3/sprite_badguy30.png" id="2_7m7d0"]
 [ext_resource type="Texture2D" uid="uid://ccae7uugoq6vw" path="res://art/BadGuy/sprite_badguy1.png" id="2_ojb03"]
-[ext_resource type="Texture2D" uid="uid://clibo6msglpu5" path="res://art/BadGuy3/sprite_badguy31.png" id="3_hmctf"]
 [ext_resource type="Texture2D" uid="uid://bea4an8ie626t" path="res://art/BadGuy/sprite_badguy2.png" id="3_wyter"]
-[ext_resource type="Texture2D" uid="uid://bye7wv8gue8ql" path="res://art/BadGuy3/sprite_badguy32.png" id="4_krtyr"]
 [ext_resource type="Texture2D" uid="uid://djsjrn1xcrykc" path="res://art/BadGuy/sprite_badguy3.png" id="4_m1ktl"]
-[ext_resource type="Texture2D" uid="uid://dnhb6cpxs3tot" path="res://art/BadGuy3/sprite_badguy33.png" id="5_6okwu"]
 [ext_resource type="Texture2D" uid="uid://4abado577lxk" path="res://art/BadGuy/sprite_badguy4.png" id="5_f72wj"]
-[ext_resource type="Texture2D" uid="uid://bsihek3o2swwx" path="res://art/BadGuy3/sprite_badguy34.png" id="6_lkb2k"]
 [ext_resource type="Texture2D" uid="uid://c0af63c5lqphh" path="res://art/BadGuy/sprite_badguy5.png" id="6_oyiat"]
 [ext_resource type="Texture2D" uid="uid://bnef5w2xpd35w" path="res://art/BadGuy/sprite_badguy6.png" id="7_7ujgr"]
-[ext_resource type="Texture2D" uid="uid://b14yaew514gp6" path="res://art/BadGuy2/sprite_bagguy20.png" id="7_k58l4"]
-[ext_resource type="Texture2D" uid="uid://dvd1rpuxx87t1" path="res://art/BadGuy2/sprite_bagguy22.png" id="8_y6f61"]
-[ext_resource type="Texture2D" uid="uid://c0v7fdqqdcjm4" path="res://art/BadGuy2/sprite_bagguy21.png" id="9_qsine"]
-[ext_resource type="Texture2D" uid="uid://d4botnarbrfeg" path="res://art/BadGuy2/sprite_bagguy23.png" id="10_0xm0j"]
-[ext_resource type="Texture2D" uid="uid://bym6h6l50afi2" path="res://art/BadGuy2/sprite_bagguy24.png" id="11_mxndr"]
-[ext_resource type="Texture2D" uid="uid://dxgqj3fxwtpfj" path="res://art/BadGuy2/sprite_bagguy25.png" id="12_v758b"]
-[ext_resource type="Texture2D" uid="uid://dsiwejpbuq0hl" path="res://art/BadGuy2/sprite_bagguy26.png" id="13_ngasw"]
-[ext_resource type="Texture2D" uid="uid://7xb3qcdqme58" path="res://art/BadGuy2/sprite_bagguy27.png" id="14_myygp"]
-[ext_resource type="Texture2D" uid="uid://bu28x0enocp14" path="res://art/BadGuy2/sprite_bagguy28.png" id="15_8dexe"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_68hws"]
 animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("2_7m7d0")
-}, {
-"duration": 1.0,
-"texture": ExtResource("3_hmctf")
-}, {
-"duration": 1.0,
-"texture": ExtResource("4_krtyr")
-}, {
-"duration": 1.0,
-"texture": ExtResource("5_6okwu")
-}, {
-"duration": 1.0,
-"texture": ExtResource("6_lkb2k")
-}],
-"loop": true,
-"name": &"fly",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("7_k58l4")
-}, {
-"duration": 1.0,
-"texture": ExtResource("8_y6f61")
-}, {
-"duration": 1.0,
-"texture": ExtResource("9_qsine")
-}, {
-"duration": 1.0,
-"texture": ExtResource("10_0xm0j")
-}, {
-"duration": 1.0,
-"texture": ExtResource("11_mxndr")
-}, {
-"duration": 1.0,
-"texture": ExtResource("12_v758b")
-}, {
-"duration": 1.0,
-"texture": ExtResource("13_ngasw")
-}, {
-"duration": 1.0,
-"texture": ExtResource("14_myygp")
-}, {
-"duration": 1.0,
-"texture": ExtResource("15_8dexe")
-}],
-"loop": true,
-"name": &"swim",
-"speed": 10.0
-}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("1_libon")
@@ -100,7 +34,7 @@ animations = [{
 "texture": ExtResource("7_7ujgr")
 }],
 "loop": true,
-"name": &"walk",
+"name": &"default",
 "speed": 10.0
 }]
 
@@ -108,15 +42,14 @@ animations = [{
 radius = 30.0
 height = 92.0
 
-[node name="Mob" type="RigidBody2D"]
+[node name="Mob" type="RigidBody2D" groups=["mobs"]]
 collision_mask = 0
 gravity_scale = 2.66454e-15
 script = ExtResource("1_k8chb")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." groups=["mobs"]]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_68hws")
-animation = &"walk"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1, -7)

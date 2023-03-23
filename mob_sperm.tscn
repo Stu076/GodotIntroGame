@@ -1,0 +1,67 @@
+[gd_scene load_steps=12 format=3 uid="uid://cccfvhycjxo3d"]
+
+[ext_resource type="Script" path="res://mob_sperm.gd" id="1_dd0qr"]
+[ext_resource type="Texture2D" uid="uid://b14yaew514gp6" path="res://art/BadGuy2/sprite_bagguy20.png" id="1_j2tk0"]
+[ext_resource type="Texture2D" uid="uid://c0v7fdqqdcjm4" path="res://art/BadGuy2/sprite_bagguy21.png" id="2_3gptp"]
+[ext_resource type="Texture2D" uid="uid://dvd1rpuxx87t1" path="res://art/BadGuy2/sprite_bagguy22.png" id="3_66o8b"]
+[ext_resource type="Texture2D" uid="uid://d4botnarbrfeg" path="res://art/BadGuy2/sprite_bagguy23.png" id="4_yx3ef"]
+[ext_resource type="Texture2D" uid="uid://bym6h6l50afi2" path="res://art/BadGuy2/sprite_bagguy24.png" id="5_3lfv7"]
+[ext_resource type="Texture2D" uid="uid://dxgqj3fxwtpfj" path="res://art/BadGuy2/sprite_bagguy25.png" id="6_syyy3"]
+[ext_resource type="Texture2D" uid="uid://dsiwejpbuq0hl" path="res://art/BadGuy2/sprite_bagguy26.png" id="7_7dpdt"]
+[ext_resource type="Texture2D" uid="uid://7xb3qcdqme58" path="res://art/BadGuy2/sprite_bagguy27.png" id="8_hxpcl"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_f7wpg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_j2tk0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_3gptp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_66o8b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_yx3ef")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_3lfv7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_syyy3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_7dpdt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_hxpcl")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0ljny"]
+radius = 11.0
+height = 66.0
+
+[node name="MobSperm" type="RigidBody2D" groups=["mobs"]]
+collision_mask = 0
+gravity_scale = 2.66454e-15
+script = ExtResource("1_dd0qr")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_f7wpg")
+frame = 5
+frame_progress = 0.561229
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-3, -11)
+rotation = 4.71239
+shape = SubResource("CapsuleShape2D_0ljny")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+
+[connection signal="screen_exited" from="VisibleOnScreenEnabler2D" to="." method="_on_visible_on_screen_enabler_2d_screen_exited"]

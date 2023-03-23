@@ -3,6 +3,8 @@ extends Node
 const HIGH_SCORE_FILE_NAME = "user://high_score.dat"
 
 @export var mob_scene: PackedScene
+@export var mob_sperm_scene: PackedScene
+@export var mob_eye_scene: PackedScene
 var score
 
 
@@ -22,9 +24,12 @@ func game_over():
 	display_high_score()
 	$ScoreTimer.stop()
 	$MobTimer.stop()
+	$MobSpermTimer.stop()
+	$MobEyeTimer.stop()
 	$HUD.show_game_over()
 	$MainMusic.stop()
 	$GameOverSound.play()
+	get_tree().call_group("mobs", "queue_free")
 	
 
 
@@ -38,33 +43,6 @@ func new_game():
 	$MainMusic.play()
 
 
-
-func _on_mob_timer_timeout():
-	# create a new mob scene instance
-	var mob = mob_scene.instantiate()
-	
-	# choose a random location on Path2D
-	var mob_spawn_location = get_node("MobPath/MobSpawnLocation")
-	mob_spawn_location.progress_ratio = randf()
-	
-	# set the mob's direction perpendicular to the path direction
-	var direction = mob_spawn_location.rotation + PI / 2
-	
-	# set the mob's position to a random location
-	mob.position = mob_spawn_location.position
-	
-	# add some randomness to the direction
-	direction += randf_range(-PI / 4, PI / 4)
-	mob.rotation = direction
-	
-	# choose the velocity for the mob
-	var velocity = Vector2(randf_range(150.0, 250.0), 0.0)
-	mob.linear_velocity = velocity.rotated(direction)
-	
-	# spawn the mob by adding it to the main scene
-	add_child(mob)
-
-
 func _on_score_timer_timeout():
 	score += 1
 	$HUD.update_score(score)
@@ -72,6 +50,8 @@ func _on_score_timer_timeout():
 
 func _on_start_timer_timeout():
 	$MobTimer.start()
+	$MobSpermTimer.start()
+	$MobEyeTimer.start()
 	$ScoreTimer.start()
 
 
@@ -109,3 +89,67 @@ func save_high_score():
 		
 		if score >= high_score:
 			set_high_score(score)
+
+
+
+func _on_mob_timer_timeout():
+	# create a new mob scene instance
+	var mob = mob_scene.instantiate()
+	
+	# choose a random location on Path2D
+	var mob_spawn_location = get_node("MobPath/MobSpawnLocation")
+	mob_spawn_location.progress_ratio = randf()
+	
+	# set the mob's direction perpendicular to the path direction
+	var direction = mob_spawn_location.rotation + PI / 2
+	
+	# set the mob's position to a random location
+	mob.position = mob_spawn_location.position
+	
+	# add some randomness to the direction
+	direction += randf_range(-PI / 4, PI / 4)
+	mob.rotation = direction
+	
+	# choose the velocity for the mob
+	var velocity = Vector2(randf_range(150.0, 250.0), 0.0)
+	mob.linear_velocity = velocity.rotated(direction)
+	
+	# spawn the mob by adding it to the main scene
+	add_child(mob)
+
+func _on_mob_sperm_timer_timeout():
+	var mob = mob_sperm_scene.instantiate()
+	
+	var mob_spawn_location = $MobPath/MobSpawnLocation
+	mob_spawn_location.progress_ratio = randf()
+	
+	var direction = mob_spawn_location.rotation + PI / 2
+	
+	mob.position = mob_spawn_location.position
+	
+	direction += randf_range(-PI / 4, PI / 4)
+	mob.rotation = direction
+	
+	var velocity = Vector2(randf_range(250.0, 350.0), 0.0)
+	mob.linear_velocity = velocity.rotated(direction)
+	
+	add_child(mob)
+
+
+func _on_mob_eye_timer_timeout():
+	var mob = mob_eye_scene.instantiate()
+	
+	var mob_spawn_location = $MobPath/MobSpawnLocation
+	mob_spawn_location.progress_ratio = randf()
+	
+	var direction = mob_spawn_location.rotation + PI / 2
+	
+	mob.position = mob_spawn_location.position
+	
+	direction += randf_range(-PI / 4, PI / 4)
+	mob.rotation = direction
+	
+	var velocity = Vector2(randf_range(100.0, 150.0), 0.0)
+	mob.linear_velocity = velocity.rotated(direction)
+	
+	add_child(mob)

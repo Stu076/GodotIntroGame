@@ -4,10 +4,6 @@ extends RigidBody2D
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$AnimatedSprite2D.play()
-	#var mob_types = $AnimatedSprite2D.get_sprite_frames().get_animation_names()
-	#$AnimatedSprite2D.animation = mob_types[randi() % mob_types.size()]
-	# TODO: need to create 3 separate mobs, because of weird shapes the
-	# CollisionShape2D is mismatched
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
